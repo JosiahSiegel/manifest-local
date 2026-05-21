@@ -42,7 +42,7 @@ name: mnfst
 
 services:
   manifest:
-    image: manifestdotbuild/manifest:latest
+    image: ${MANIFEST_IMAGE:-manifestdotbuild/manifest:latest}
     #ports:
     #  - "127.0.0.1:${PORT:-2099}:${PORT:-2099}"
     ports:
@@ -94,6 +94,7 @@ services:
       # https://manifest.build/telemetry for the exact payload shape.
       - MANIFEST_TELEMETRY_DISABLED=${MANIFEST_TELEMETRY_DISABLED:-0}
       - PROVIDER_TIMEOUT_MS=${PROVIDER_TIMEOUT_MS:-180000}
+      - CONCURRENCY_MAX=${CONCURRENCY_MAX:-10}
     depends_on:
       postgres:
         condition: service_healthy
